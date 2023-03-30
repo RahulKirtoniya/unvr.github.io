@@ -1,0 +1,55 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+
+</script>
+<div id="universities-table">
+
+</div>
+<script>
+    $.ajax({
+        url: "http://universities.hipolabs.com/search?country=India",
+        success: function (data) {
+            // Do something with the data
+        }
+    });
+    $.ajax({
+  url: "http://universities.hipolabs.com/search?country=India",
+  success: function(data) {
+    // Create the table element
+    var table = $("<table>").addClass("table");
+    var thead = $("<thead>");
+    var tbody = $("<tbody>");
+
+    // Add table headers
+    thead.append(
+      $("<tr>").append(
+        $("<th>").text("Name"),
+        $("<th>").text("Country"),
+        $("<th>").text("State"),
+        $("<th>").text("Website")
+      )
+    );
+
+    // Add table rows
+    data.forEach(function(university) {
+      tbody.append(
+        $("<tr>").append(
+          $("<td>").text(university.name),
+          $("<td>").text(university.country),
+          $("<td>").text(university.state),
+          $("<td>").append($("<a>").attr("href", university.web_pages[0]).text(university.web_pages[0]))
+        )
+      );
+    });
+
+    // Add thead and tbody to the table
+    table.append(thead, tbody);
+
+    // Add the table to the container element
+    $("#universities-table").append(table);
+  }
+});
+    
+
+
+
+</script>
